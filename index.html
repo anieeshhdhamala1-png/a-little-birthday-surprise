@@ -1,171 +1,723 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Birthday Surprise 💗</title>
+<title>A Little Birthday Surprise 🎀</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ min-height:100vh;
+ background:linear-gradient(135deg,#ffe5ed,#fff5f7,#f9dce8);
+ font-family:'Caveat',cursive;
+ color:#754052;
+ overflow-x:hidden;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ffe5ed, #fff3f6, #f9dce8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Caveat', cursive;
-    overflow: hidden;
-    color: #754052;
+#hearts span{
+ position:fixed;
+ bottom:-40px;
+ color:#e99ab2;
+ opacity:.55;
+ animation:float 9s linear infinite;
+ pointer-events:none;
+ z-index:0;
 }
 
-.heart {
-    position: fixed;
-    color: #e99ab2;
-    font-size: 22px;
-    opacity: 0.5;
-    animation: float 7s linear infinite;
-    pointer-events: none;
+@keyframes float{
+ to{transform:translateY(-115vh) rotate(360deg)}
 }
 
-@keyframes float {
-    0% { transform: translateY(110vh) rotate(0deg); }
-    100% { transform: translateY(-10vh) rotate(360deg); }
+#app{
+ position:relative;
+ z-index:1;
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:25px 15px;
 }
 
-.container {
-    width: 90%;
-    max-width: 480px;
-    padding: 35px 25px;
-    text-align: center;
-    background: rgba(255,255,255,0.65);
-    border: 1px solid white;
-    border-radius: 28px;
-    box-shadow: 0 10px 40px rgba(190, 110, 140, 0.15);
-    animation: appear 1.2s ease;
+.scene{
+ display:none;
+ width:100%;
+ max-width:520px;
+ padding:32px 24px;
+ text-align:center;
+ background:rgba(255,255,255,.78);
+ border:1px solid white;
+ border-radius:28px;
+ box-shadow:0 12px 40px rgba(190,110,140,.15);
+ animation:appear .65s ease;
 }
 
-@keyframes appear {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.scene.active{display:block}
+
+@keyframes appear{
+ from{opacity:0;transform:translateY(22px)}
+ to{opacity:1;transform:translateY(0)}
 }
 
-h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 43px;
-    color: #d66b91;
-    margin-bottom: 15px;
+h1{
+ font-family:'Dancing Script',cursive;
+ color:#d66b91;
+ font-size:43px;
+ margin-bottom:16px;
 }
 
-.subtitle {
-    font-size: 23px;
-    margin-bottom: 22px;
+h2{
+ font-family:'Dancing Script',cursive;
+ color:#d66b91;
+ font-size:32px;
+ margin-bottom:15px;
 }
 
-.message {
-    font-size: 21px;
-    line-height: 1.5;
-    margin-bottom: 25px;
+p{
+ font-size:22px;
+ line-height:1.5;
+ margin:15px 0;
 }
 
-button {
-    border: none;
-    background: #e98eac;
-    color: white;
-    padding: 13px 32px;
-    border-radius: 30px;
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(214,107,145,0.25);
-    transition: 0.3s;
+.emoji{
+ font-size:55px;
+ margin-bottom:15px;
 }
 
-button:hover {
-    transform: scale(1.06);
-    background: #d66b91;
+button{
+ border:0;
+ border-radius:30px;
+ background:#e98eac;
+ color:white;
+ padding:12px 25px;
+ font-family:'Caveat',cursive;
+ font-size:21px;
+ margin:8px 4px;
+ cursor:pointer;
+ transition:.3s;
+ box-shadow:0 5px 14px #e98eac44;
 }
 
-.signature {
-    margin-top: 25px;
-    font-size: 19px;
-    color: #a87989;
+button:hover{transform:scale(1.05);background:#d66b91}
+
+.secondary{background:#c99aaa}
+
+.navigation{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-top:28px;
+ gap:10px;
 }
 
+.navigation button{font-size:19px}
+
+#progress{
+ width:100%;
+ height:6px;
+ background:#f6d6e1;
+ border-radius:20px;
+ margin-bottom:20px;
+ overflow:hidden;
+}
+
+#progressBar{
+ width:5.88%;
+ height:100%;
+ background:#e98eac;
+ transition:.4s;
+}
+
+.small{font-size:18px;color:#a87989}
+.signature{margin-top:22px;color:#a87989;font-size:20px}
+.hiddenMessage{
+ display:none;
+ background:#fff0f5;
+ border-radius:18px;
+ padding:18px;
+ margin-top:15px;
+ font-size:23px;
+ animation:appear .5s ease;
+}
+
+.quizOption{display:block;width:100%;max-width:280px;margin:10px auto}
+.gift{background:#fff0f5;color:#bd6685;font-size:45px;padding:20px;width:90px;height:90px;border-radius:22px}
+#quizResult{font-size:22px;margin-top:15px}
+
+/* CAKE */
+.cake-area{
+ min-height:330px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ perspective:800px;
+ margin:10px 0;
+}
+
+.cake{
+ position:relative;
+ width:230px;
+ height:190px;
+ transition:transform 1.2s ease;
+}
+
+.cake.front .cake-top{
+ position:absolute;
+ top:0;
+ width:230px;
+ height:65px;
+ border-radius:50%;
+ background:#fff0d9;
+ border:7px solid #f5b8c9;
+ z-index:3;
+}
+
+.cake.front .cake-body{
+ position:absolute;
+ top:30px;
+ width:230px;
+ height:125px;
+ background:linear-gradient(90deg,#f3a6bd,#ffe0e8,#e98eac);
+ border-radius:0 0 28px 28px;
+ box-shadow:0 15px 0 #d9799c;
+}
+
+.cake.front .cake-top:after{
+ content:"";
+ position:absolute;
+ inset:12px;
+ border:2px dashed #e99ab2;
+ border-radius:50%;
+}
+
+.cake.front .cake-top:before{
+ content:"";
+ position:absolute;
+ left:50%;
+ top:15px;
+ transform:translateX(-50%);
+ width:100%;
+ text-align:center;
+ content:"Happy Birthday";
+ font-family:'Dancing Script',cursive;
+ font-size:20px;
+ color:#c66a89;
+}
+
+.candles{
+ position:absolute;
+ top:-40px;
+ left:50%;
+ transform:translateX(-50%);
+ display:flex;
+ gap:24px;
+ z-index:5;
+}
+
+.candle{
+ width:9px;
+ height:37px;
+ background:repeating-linear-gradient(45deg,#fff 0 5px,#e98eac 5px 10px);
+ border-radius:4px;
+ position:relative;
+}
+
+.flame{
+ position:absolute;
+ width:13px;
+ height:20px;
+ background:#ffb347;
+ border-radius:50% 50% 45% 45%;
+ top:-19px;
+ left:-2px;
+ box-shadow:0 0 16px #ffb347;
+ animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+ to{transform:scale(.8);opacity:.7}
+}
+
+/* Top view */
+.cake.top{
+ width:250px;
+ height:250px;
+ transform:rotateX(0deg);
+}
+
+.cake.top .cake-body{
+ position:absolute;
+ width:250px;
+ height:250px;
+ border-radius:50%;
+ background:#f3a6bd;
+ box-shadow:inset 0 0 0 12px #ffe0e8,0 12px 0 #d9799c;
+}
+
+.cake.top .cake-top{
+ position:absolute;
+ top:10px;
+ left:10px;
+ width:230px;
+ height:230px;
+ border-radius:50%;
+ background:#fff0d9;
+ border:8px solid #f5b8c9;
+ z-index:2;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-family:'Dancing Script',cursive;
+ font-size:27px;
+ color:#c66a89;
+}
+
+.cake.top .cake-top:after{
+ content:"";
+ position:absolute;
+ inset:12px;
+ border:3px dashed #e99ab2;
+ border-radius:50%;
+}
+
+.cake.top .candles{
+ top:45px;
+ gap:45px;
+}
+
+.cake.top .candles .candle{
+ height:28px;
+}
+
+.cake.cut{
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+ transform:rotate(-7deg) scale(.95);
+}
+
+#cakeMessage{
+ display:none;
+ font-size:22px;
+ background:#fff0f5;
+ border-radius:18px;
+ padding:15px;
+ margin-top:15px;
+}
+
+.confetti{
+ position:fixed;
+ top:-20px;
+ font-size:22px;
+ animation:fall 3s linear forwards;
+ z-index:10;
+ pointer-events:none;
+}
+
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(600deg);opacity:0}
+}
+
+@media(max-width:380px){
+ h1{font-size:36px}
+ p{font-size:20px}
+ .scene{padding:25px 17px}
+}
 </style>
 </head>
 
 <body>
-
 <div id="hearts"></div>
 
-<div class="container">
-    <div style="font-size:45px;">🎀💗</div>
+<div id="app">
+<div style="width:100%;max-width:520px">
 
-    <h1>Welcome, Aasthu!</h1>
+<div id="progress">
+ <div id="progressBar"></div>
+</div>
 
-    <div class="subtitle">
-        A little surprise for you...
-    </div>
+<!-- PAGE 1 -->
+<section class="scene active">
+ <div class="emoji">🎀💗</div>
+ <h1>Welcome, Aasthu!</h1>
+ <h2>A little surprise for you...</h2>
+ <p>
+ Heyyy Aasthu! 🥹💕<br><br>
+ So, finally your special day is here!<br>
+ I know I can't be there beside you to celebrate this day,
+ but that doesn't mean I can't make it a little special for you.<br><br>
+ So I made something for you. A little box filled with surprises,
+ funny moments, memories and lots of wishes.<br><br>
+ I hope this little effort brings a big smile to your face.
+ Hehe! 😁
+ </p>
+ <p>Ready to explore?</p>
+ <div class="signature">Made with love,<br>Anish 💗</div>
+</section>
 
-    <div class="message">
-        Heyyy Aasthu! 🥹💕<br><br>
+<!-- PAGE 2 -->
+<section class="scene">
+ <div class="emoji">💌</div>
+ <h1>Before We Start...</h1>
+ <p>
+ Before you explore everything, I just want you to know
+ that this little website is made especially for you.<br><br>
+ Every page has a little thought behind it.
+ Some will make you laugh, some might make you smile,
+ and some are just things I wanted to tell you.
+ </p>
+ <p>So take your time and enjoy every little surprise. 🥰</p>
+</section>
 
-        So, finally your special day is here!
-        I know I can't be there beside you to celebrate
-        this day, but that doesn't mean I can't make
-        it a little special for you.<br><br>
+<!-- PAGE 3 -->
+<section class="scene">
+ <div class="emoji">😂</div>
+ <h1>Heyyy, Badarni!</h1>
+ <p>
+ Oii Badarni! K xa khabar? 😂<br><br>
+ Aaja timro birthday ho, so aaja chai timilai
+ ali dherai disturb garna paunu parxa hai!<br><br>
+ Don't worry, aaja ko din timro ho.
+ So enjoy gara, smile gara, ani malai birsine chai haina ni! 🤣
+ </p>
+</section>
 
-        So I made something for you.
-        A little box filled with surprises,
-        funny moments, memories and lots of wishes.<br><br>
+<!-- PAGE 4 -->
+<section class="scene">
+ <div class="emoji">🧠</div>
+ <h1>How Well Do You Know Me?</h1>
+ <p>Let's see how much you know about this annoying person! 😂</p>
+ <p><b>Who talks more?</b></p>
+ <button class="quizOption" onclick="quiz('correct')">Anish, obviously! 😂</button>
+ <button class="quizOption" onclick="quiz('wrong')">Aasthu, of course!</button>
+ <div id="quizResult"></div>
+</section>
 
-        I hope this little effort brings a big smile
-        to your face. And please, enjoy every page!
-        Hehe. 😁<br><br>
+<!-- PAGE 5 -->
+<section class="scene">
+ <div class="emoji">🤦‍♂️</div>
+ <h1>Things You Have to Tolerate!</h1>
+ <p>
+ My unnecessary bakbak.<br>
+ My random messages.<br>
+ My silly jokes.<br>
+ My habit of disturbing you.<br>
+ And sometimes... my overthinking! 😂<br><br>
+ Sorry hai, yo package ko return policy xaina! 🤣
+ </p>
+</section>
 
-        Ready to explore?
-    </div>
+<!-- PAGE 6 -->
+<section class="scene">
+ <div class="emoji">🥺</div>
+ <h1>Okay, I'm Sorry!</h1>
+ <p>
+ Jokes aside, I know sometimes my words or actions
+ might have annoyed you or even hurt you.<br><br>
+ If I ever made you feel bad, I'm genuinely sorry.
+ I never wanted to make you feel that way.<br><br>
+ I may not always express things perfectly,
+ but I truly appreciate you and our bond. ❤️
+ </p>
+</section>
 
-    <button onclick="startSurprise()">
-        Let's Begin! ✨
-    </button>
+<!-- PAGE 7 -->
+<section class="scene">
+ <div class="emoji">🎁</div>
+ <h1>Pick Your Surprise!</h1>
+ <p>Choose any gift box to reveal a little surprise!</p>
+ <button class="gift" onclick="gift(1)">🎁</button>
+ <button class="gift" onclick="gift(2)">🎀</button>
+ <button class="gift" onclick="gift(3)">💝</button>
+ <div id="giftResult" class="hiddenMessage"></div>
+</section>
 
-    <div class="signature">
-        Made with love,<br>
-        Anish 💗
-    </div>
+<!-- PAGE 8 -->
+<section class="scene">
+ <div class="emoji">🫶</div>
+ <h1>Our Little Bond</h1>
+ <p>
+ Some people become important without even trying.
+ And sometimes, a simple bond becomes something
+ worth appreciating.<br><br>
+ I'm glad I got to know you, Aasthu.
+ Thank you for being a part of my little world. ❤️
+ </p>
+</section>
+
+<!-- PAGE 9 -->
+<section class="scene">
+ <div class="emoji">🌈</div>
+ <h1>Always Together!</h1>
+ <p>
+ Distance may keep us in different places,
+ but it doesn't mean we can't support each other.<br><br>
+ I hope we keep sharing jokes, stories,
+ random conversations and countless memories.<br><br>
+ Stay the same wonderful person, Aasthu! 💗
+ </p>
+</section>
+
+<!-- PAGE 10 -->
+<section class="scene">
+ <div class="emoji">📸</div>
+ <h1>Little Memories</h1>
+ <p>
+ Every friendship has its own little moments.<br><br>
+ The random conversations, the silly jokes,
+ the unexpected laughs and all those tiny memories
+ that somehow become special.<br><br>
+ I hope we make many more memories together! ✨
+ </p>
+ <p class="small">Photo memories can be added here later.</p>
+</section>
+
+<!-- PAGE 11 -->
+<section class="scene">
+ <div class="emoji">🌷</div>
+ <h1>A Thousand Wishes</h1>
+ <p>
+ May your days be filled with happiness.<br>
+ May your dreams slowly become reality.<br>
+ May you achieve everything you work for.<br>
+ May you always find reasons to smile.<br>
+ May you travel to beautiful places.<br>
+ May life bring you countless beautiful moments.<br><br>
+ You deserve a wonderful year ahead, Aasthu! ❤️
+ </p>
+</section>
+
+<!-- PAGE 12 -->
+<section class="scene">
+ <div class="emoji">🔐</div>
+ <h1>Unlock Your Message</h1>
+ <p>Tap the lock to reveal your secret message!</p>
+ <button onclick="unlock()">🔒 Unlock</button>
+ <div id="unlockResult" class="hiddenMessage">
+ You are appreciated more than you know. ❤️
+ Never forget that your presence matters.
+ </div>
+</section>
+
+<!-- PAGE 13 -->
+<section class="scene">
+ <div class="emoji">💐</div>
+ <h1>I'm Thankful for You!</h1>
+ <p>
+ I'm thankful that our paths crossed.<br><br>
+ Thankful for the conversations,
+ the laughs and the little moments.<br><br>
+ Maybe I don't say it often,
+ but I genuinely appreciate having you in my life.<br><br>
+ Thank you for being you, Aasthu! 🥹
+ </p>
+</section>
+
+<!-- PAGE 14 -->
+<section class="scene">
+ <div class="emoji">💗</div>
+ <h1>Before You Go...</h1>
+ <p>
+ Aasthu,<br><br>
+ I hope you never underestimate how special
+ you are to the people around you.<br><br>
+ Keep smiling, keep dreaming and keep being yourself.
+ Life won't always be perfect, but I hope you always
+ find strength and happiness along the way.<br><br>
+ And please remember, you have someone who
+ genuinely wishes the best for you.<br><br>
+ Take care of yourself. ❤️
+ </p>
+ <div class="signature">— Anish</div>
+</section>
+
+<!-- PAGE 15: CAKE -->
+<section class="scene">
+ <div class="emoji">🎂</div>
+ <h1>Time to Cut the Cake!</h1>
+ <p>Your special cake is finally here, Aasthu! 💗</p>
+
+ <div class="cake-area">
+  <div class="cake front" id="cake">
+   <div class="cake-body"></div>
+   <div class="cake-top"> </div>
+   <div class="candles">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+   </div>
+  </div>
+ </div>
+
+ <button onclick="topView()">View From Above ✨</button>
+ <button onclick="cutCake()">Cut the Cake! 🎂</button>
+
+ <button class="secondary" onclick="whyName()">
+ Why is your name not on the cake? 🤔
+ </button>
+
+ <div id="cakeMessage">
+  Because your name is too precious to be cut,
+  even on a birthday cake. ❤️<br><br>
+  That's why I kept your cake simple,
+  with just a little message and lots of love.
+ </div>
+ <div id="cakeStatus" class="small"></div>
+</section>
+
+<!-- PAGE 16 -->
+<section class="scene">
+ <div class="emoji">🎀</div>
+ <h1>One Last Surprise!</h1>
+ <p>
+ Waittt! You thought everything was over? 😂<br><br>
+ Not so soon! I still have one little thing to say...<br><br>
+ Thank you for exploring this little website.
+ I hope it made your day a little brighter.<br><br>
+ And remember, this was made just for you! 💗
+ </p>
+</section>
+
+<!-- PAGE 17 -->
+<section class="scene">
+ <div class="emoji">🎉🎂💗</div>
+ <h1>Happy Birthday Again, Aasthu!</h1>
+ <p>
+ Once again, HAPPY BIRTHDAY! 🥳<br><br>
+ May this new chapter of your life bring
+ you endless happiness, success, good health
+ and beautiful memories.<br><br>
+ Keep smiling, keep shining and enjoy your day
+ to the fullest!<br><br>
+ Lots of best wishes,<br>
+ Anish ❤️
+ </p>
+ <h2>THE END... BUT MORE MEMORIES TO COME! ✨</h2>
+ <button onclick="celebrate()">Celebrate Again! 🎉</button>
+</section>
+
+<div class="navigation">
+ <button class="secondary" id="backBtn" onclick="move(-1)">← Back</button>
+ <span id="pageNumber" class="small">1 / 17</span>
+ <button id="nextBtn" onclick="move(1)">Next →</button>
+</div>
+
+</div>
 </div>
 
 <script>
-const hearts = document.getElementById("hearts");
+let current = 0;
+const scenes = document.querySelectorAll(".scene");
 
-for(let i = 0; i < 18; i++) {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = ["♡","♥","✦","✨"][i % 4];
-    heart.style.left = Math.random() * 100 + "%";
-    heart.style.animationDelay = Math.random() * 7 + "s";
-    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
-    hearts.appendChild(heart);
+function showScene(n){
+ scenes[current].classList.remove("active");
+ current = n;
+ scenes[current].classList.add("active");
+
+ document.getElementById("pageNumber").textContent =
+ (current+1)+" / "+scenes.length;
+
+ document.getElementById("progressBar").style.width =
+ ((current+1)/scenes.length*100)+"%";
+
+ document.getElementById("backBtn").style.visibility =
+ current===0 ? "hidden":"visible";
+
+ document.getElementById("nextBtn").textContent =
+ current===scenes.length-1 ? "Start Again ↺":"Next →";
+
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function startSurprise() {
-    document.body.style.transition = "opacity 0.7s";
-    document.body.style.opacity = "0";
-
-    setTimeout(() => {
-        window.location.href = "page2.html";
-    }, 700);
+function move(direction){
+ if(current===scenes.length-1 && direction===1){
+  showScene(0);
+  return;
+ }
+ const next = current+direction;
+ if(next>=0 && next<scenes.length) showScene(next);
 }
+
+function quiz(answer){
+ const result=document.getElementById("quizResult");
+ if(answer==="correct"){
+  result.innerHTML="Correct answer! 😂 You know me too well!";
+ }else{
+  result.innerHTML="Wronggg! It's definitely Anish! 🤣";
+ }
+}
+
+function gift(number){
+ const messages=[
+  "Surprise! You deserve all the happiness in the world! 💗",
+  "A little reminder: Never stop smiling, Aasthu! 🌷",
+  "Your bonus gift: One year full of beautiful memories! 🎁"
+ ];
+ const box=document.getElementById("giftResult");
+ box.style.display="block";
+ box.textContent=messages[number-1];
+}
+
+function unlock(){
+ document.getElementById("unlockResult").style.display="block";
+}
+
+function topView(){
+ const cake=document.getElementById("cake");
+ cake.classList.remove("front");
+ cake.classList.add("top");
+ document.getElementById("cakeStatus").textContent=
+ "Here's your cake from the top! 💗";
+}
+
+function cutCake(){
+ const cake=document.getElementById("cake");
+ cake.classList.add("cut");
+
+ document.querySelectorAll(".flame").forEach(flame=>{
+  flame.style.display="none";
+ });
+
+ document.getElementById("cakeStatus").textContent=
+ "Yayyy! Cake cutting time! 🎂💗";
+
+ confetti();
+}
+
+function whyName(){
+ document.getElementById("cakeMessage").style.display="block";
+}
+
+function confetti(){
+ const symbols=["🎉","💗","✨","🎊","🌸"];
+ for(let i=0;i<35;i++){
+  const item=document.createElement("div");
+  item.className="confetti";
+  item.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  item.style.left=Math.random()*100+"vw";
+  item.style.animationDelay=Math.random()*1.5+"s";
+  document.body.appendChild(item);
+  setTimeout(()=>item.remove(),4500);
+ }
+}
+
+function celebrate(){
+ confetti();
+}
+
+for(let i=0;i<18;i++){
+ const heart=document.createElement("span");
+ heart.textContent=["♡","♥","✦","✨"][i%4];
+ heart.style.left=Math.random()*100+"%";
+ heart.style.animationDelay=Math.random()*9+"s";
+ heart.style.animationDuration=(6+Math.random()*6)+"s";
+ document.getElementById("hearts").appendChild(heart);
+}
+
+showScene(0);
 </script>
-
 </body>
 </html>
